@@ -7,7 +7,7 @@ class Index extends BaseController
 {
     public function index()
     {
-        return '123';
+        return '456';
     }
 
     public function hello($name = 'ThinkPHP6')
