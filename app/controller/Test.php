@@ -27,7 +27,7 @@ class Test extends BaseController
             'merId' => '777290058110048',		//商户代码，请改自己的测试商户号，此处默认取demo演示页面传递的参数
             'orderId' => 'R'.date('yymdhis').rand(10000,99999),	//商户订单号，8-32位数字字母，不能含“-”或“_”，此处默认取demo演示页面传递的参数，可以自行定制规则
             'txnTime' => date('yymdhis'),	//订单发送时间，格式为YYYYMMDDhhmmss，取北京时间，此处默认取demo演示页面传递的参数
-            'txnAmt' => 2000,	//交易金额，单位分，此处默认取demo演示页面传递的参数
+            'txnAmt' => 1,	//交易金额，单位分，此处默认取demo演示页面传递的参数
 
             // 请求方保留域，
             // 透传字段，查询、通知、对账文件中均会原样出现，如有需要请启用并修改自己希望透传的数据。
@@ -50,7 +50,7 @@ class Test extends BaseController
             echo "应答报文验签失败<br>\n";
             return;
         }
-        dd($result_arr);
+        var_dump($result_arr);
         if ($result_arr["respCode"] == "00"){
             //成功
             //TODO
@@ -85,11 +85,9 @@ class Test extends BaseController
 
 
             AcpService::sign ( $params ); // 签名
-        $url =
-                SDKConfig::getSDKConfig()->singleQueryUrl;
+        $url =SDKConfig::getSDKConfig()->singleQueryUrl;
 
-        $result_arr =
-        AcpService::post ( $params, $url);
+        $result_arr =AcpService::post ( $params, $url);
         if(count($result_arr)<=0) { //没收到200应答的情况
             printResult ( $url, $params, "" );
             return;
